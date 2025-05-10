@@ -1,0 +1,18 @@
+version: '3'
+services:
+  lavalink:
+    image: fredboat/lavalink
+    ports:
+      - "2333:2333"
+    environment:
+      - _JAVA_OPTIONS=-Xmx1G
+    volumes:
+      - /home/josh/docker/jmusicbot/application.yml:/opt/Lavalink/application.yml
+
+  jmusicbot:
+    image: ghcr.io/eritbh/jmusicbot
+    environment:
+      - TOKEN=[[DISCORD_BOT_TOKEN]]
+      - OWNER=[[DISCORD_BOT_OWNER]]
+    depends_on:
+      - lavalink
